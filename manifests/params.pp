@@ -20,6 +20,12 @@ class prometheus::params {
   $node_exporter_package_ensure = 'latest'
   $node_exporter_package_name = 'node_exporter'
   $node_exporter_extra_groups = []
+  $influxdb_exporter_download_url_base = 'https://github.com/prometheus/influxdb_exporter/releases'
+  $influxdb_exporter_version = 'master'
+  $influxdb_exporter_download_extension = 'tar.gz'
+  $influxdb_exporter_package_ensure = 'latest'
+  $influxdb_exporter_package_name = 'influxdb_exporter'
+  $influxdb_exporter_extra_groups = []
   $alert_manager_download_url_base = 'https://github.com/prometheus/alertmanager/releases'
   $alert_manager_config_file = "${config_dir}/alertmanager.yaml"
   $alert_manager_global = { 'smtp_smarthost' =>'localhost:25', 'smtp_from'=>'alertmanager@localhost' }

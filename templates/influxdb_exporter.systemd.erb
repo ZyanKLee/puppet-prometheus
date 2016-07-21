@@ -1,0 +1,17 @@
+[Unit]
+Description=Prometheus exporter for machine metrics, written in Go with pluggable metric collectors.
+Wants=basic.target
+After=basic.target network.target
+
+[Service]
+User=<%= scope.lookupvar('prometheus::influxdb_exporter::user') %>
+Group=<%= scope.lookupvar('prometheus::influxdb_exporter::group') %>
+ExecStart=<%= scope.lookupvar('prometheus::influxdb_exporter::bin_dir') %>/influxdb_exporter \
+  -collectors.enabled=<%= scope.lookupvar('prometheus::influxdb_exporter::collectors').join(',') %> <%= scope.lookupvar('prometheus::influxdb_exporter::extra_options') %>
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
